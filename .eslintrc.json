@@ -1,0 +1,20 @@
+{
+  "root": true,
+  "plugins": ["prettier", "lit"],
+  "extends": [
+    "eslint:recommended",
+    "@open-wc",
+    "prettier",
+    "plugin:lit/recommended"
+  ],
+  "parserOptions": {
+    "ecmaVersion": 13,
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "rules": {
+    "prettier/prettier": ["error"],
+    "lit-a11y/click-events-have-key-events": ["off"]
+  }
+}

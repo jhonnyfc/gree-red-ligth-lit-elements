@@ -1,0 +1,7 @@
+{
+  "*.js": [
+    "npm run lint:fix",
+    "prettier --write"
+  ],
+  "*.spec.ts": "npm run test:unit"
+}
