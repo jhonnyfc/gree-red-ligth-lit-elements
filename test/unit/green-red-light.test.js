@@ -1,7 +1,7 @@
 import { html } from 'lit'
 import { fixture, expect } from '@open-wc/testing'
 
-import '../src/green-red-light.js'
+import '../../src/green-red-light.js'
 
 describe('GreenRedLight', () => {
   let element
