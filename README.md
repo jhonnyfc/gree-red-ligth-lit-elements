@@ -1,31 +1,53 @@
-<p align="center">
-  <img width="200" src="https://open-wc.org/hero.png"></img>
-</p>
-
 ## Open-wc Starter App
 
 [![Built with open-wc recommendations](https://img.shields.io/badge/built%20with-open--wc-blue.svg)](https://github.com/open-wc)
+[![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg)](https://conventionalcommits.org)
 
-## Quickstart
 
-To get started:
+## Project setup
 
-```bash
-npm init @open-wc
-# requires node 10 & npm 6 or higher
+First, be sure that you're using the project `Node.js` version, and then install dependencies:
+
+```
+nvm use <node_version>
+npm install
 ```
 
-## Scripts
+TIP: You can use `avn` to deeply integrate into your shell and automatically invoke `nvm` when changing directories. See [deeper-shell-integration](https://github.com/nvm-sh/nvm#deeper-shell-integration).
 
-- `start` runs your app for development, reloading on file changes
-- `start:build` runs your app after it has been built using the build command
-- `build` builds your app and outputs it in your `dist` directory
-- `test` runs your test suite with Web Test Runner
-- `lint` runs the linter for your project
-- `format` fixes linting and formatting errors
+## Local Demo with `web-dev-server`
+
+```bash
+npm start
+```
+
+To run a local development server that serves the basic demo located in `demo/index.html`
+
+## Linting and formatting
+
+To scan the project for linting and formatting errors, run
+
+```bash
+npm run lint
+```
+
+To automatically fix linting and formatting errors, run
+
+```bash
+npm run lint:fix
+```
+
+### Run unit tests with [Web-Test-Runner](https://modern-web.dev/docs/test-runner/overview/)
+
+```
+npm run test:unit:<watch|coverage>
+```
+
 
 ## Tooling configs
 
-For most of the tools, the configuration is in the `package.json` to reduce the amount of files in your project.
+For most of the tools, the configuration is in the `package.json` to minimize the amount of files in your project.
 
 If you customize the configuration a lot, you can consider moving them to individual files.
+
+
