@@ -1,3 +1,11 @@
 coverage
 dist
 *.md
+.gitignore
+.nvmrc
+.prettierignore
+.eslintignore
+.editorconfig
+LICENSE
+assets
+node_modules

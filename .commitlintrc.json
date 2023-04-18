@@ -1,16 +1,7 @@
 {
-  "extends": [
-    "@commitlint/config-conventional"
-  ],
+  "extends": ["@commitlint/config-conventional"],
   "rules": {
-    "references-empty": [
-      1,
-      "never"
-    ],
-    "header-max-length": [
-      0,
-      "always",
-      72
-    ]
+    "references-empty": [1, "never"],
+    "header-max-length": [0, "always", 72]
   }
 }

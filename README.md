@@ -27,14 +27,19 @@ To run a local development server that serves the basic demo located in `demo/in
 
 To scan the project for linting and formatting errors, run
 
-```bash
-npm run lint
+```sh
+npm run eslint:<all>
+npm run eslint:fix:<all>
 ```
 
-To automatically fix linting and formatting errors, run
+```sh
+npm run prettier:<all>
+npm run prettier:fix:<all>
+```
 
+To run a the same time
 ```bash
-npm run lint:fix
+npm run lint
 ```
 
 ### Run unit tests with [Web-Test-Runner](https://modern-web.dev/docs/test-runner/overview/)

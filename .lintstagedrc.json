@@ -1,7 +1,4 @@
 {
-  "*.js": [
-    "npm run lint:fix",
-    "prettier --write"
-  ],
-  "*.spec.ts": "npm run test:unit"
+  "*.js": ["npm run eslint:fix", "npm run prettier:fix"],
+  "*.spec.js": "npm run test:unit"
 }
