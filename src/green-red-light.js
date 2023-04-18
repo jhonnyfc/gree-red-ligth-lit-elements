@@ -11,6 +11,12 @@ class GreenRedLight extends LitElement {
       min-height: 100vh;
       color: white;
     }
+
+    main {
+      background-color: #121113;
+      height: 100vh;
+      width: 100%;
+    }
   `
 }
 
