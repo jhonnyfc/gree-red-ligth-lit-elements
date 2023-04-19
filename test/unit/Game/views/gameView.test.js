@@ -14,4 +14,9 @@ describe('GameView', () => {
       element.shadowRoot.querySelector('top-bar-component')
     expect(topBarComponentEl).to.exist
   })
+
+  it('should renders steps-component', () => {
+    const stepsComponentEl = element.shadowRoot.querySelector('steps-component')
+    expect(stepsComponentEl).to.exist
+  })
 })

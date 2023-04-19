@@ -1,5 +1,6 @@
 import { LitElement, html, css } from 'lit'
 import '../components/topBarComponent.js'
+import '../components/stepsComponent.js'
 
 const traffiLightIconSrc = new URL(
   '../../../assets/traffic-light-solid.svg',
@@ -60,6 +61,7 @@ class GameView extends LitElement {
             .src=${traffiLightIconSrc}
           />
           <p class="score-title">Score: ${this.score}</p>
+          <steps-component></steps-component>
         </div>
       </div>
     `
