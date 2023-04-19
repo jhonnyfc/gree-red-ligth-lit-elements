@@ -1,4 +1,5 @@
 import { LitElement, html, css } from 'lit'
+import { GameHelper } from '../helper/gameHelper.js'
 import '../components/topBarComponent.js'
 import '../components/stepsComponent.js'
 
@@ -9,10 +10,10 @@ const traffiLightIconSrc = new URL(
 
 class GameView extends LitElement {
   static properties = {
-    userName: { type: String },
-    highScore: { type: Number },
-    score: { type: Number },
-    isGreen: { type: Boolean }
+    userName: { type: String, state: true },
+    highScore: { type: Number, state: true },
+    score: { type: Number, state: true },
+    isGreen: { type: Boolean, state: true }
   }
 
   constructor() {
@@ -21,6 +22,7 @@ class GameView extends LitElement {
     this.highScore = 10
     this.score = 0
     this.isGreen = true
+    this.gameHelper = new GameHelper(this.score)
   }
 
   firstUpdated() {
@@ -29,22 +31,20 @@ class GameView extends LitElement {
 
   async _beginGame() {
     for (;;) {
-      const promesa = new Promise((resolve) => {
+      // eslint-disable-next-line
+      await new Promise((resolve) => {
         setTimeout(() => {
           resolve()
-        }, this._calcSleepMillis())
+        }, this.gameHelper.calcSleepMillis())
       })
-      await promesa // eslint-disable-line
       this.isGreen = !this.isGreen
     }
   }
 
-  _calcSleepMillis() {
-    if (!this.isGreen) {
-      return 3000
-    }
+  _stepClick(e) {
+    const { detail } = e
 
-    return Math.max(10000 - this.score * 100, 2000) + Math.random(-1500, 1500)
+    this.score = this.gameHelper.controlStep(detail, this.isGreen)
   }
 
   render() {
@@ -61,7 +61,7 @@ class GameView extends LitElement {
             .src=${traffiLightIconSrc}
           />
           <p class="score-title">Score: ${this.score}</p>
-          <steps-component></steps-component>
+          <steps-component @playerStep=${this._stepClick}></steps-component>
         </div>
       </div>
     `
