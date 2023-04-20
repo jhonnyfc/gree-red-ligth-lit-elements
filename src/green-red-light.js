@@ -1,9 +1,9 @@
 import { LitElement, html, css } from 'lit'
-import './Game/views/gameView.js'
+import './Home/view/homeView.js'
 
 class GreenRedLight extends LitElement {
   render() {
-    return html` <main><game-view></game-view></main> `
+    return html` <main><home-view></home-view></main> `
   }
 
   static styles = css`
