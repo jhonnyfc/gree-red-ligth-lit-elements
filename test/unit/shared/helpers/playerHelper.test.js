@@ -57,7 +57,7 @@ describe('PlayerHelper', () => {
     const userName = 'someNAme'
 
     PlayerHelper.setCurrentPlayer(userName)
-    expect(PlayerHelper.getCurrentPaly()).to.equal(userName)
+    expect(PlayerHelper.getCurrentPlayer()).to.equal(userName)
   })
 
   it('should  save and remove current player', () => {
@@ -66,6 +66,6 @@ describe('PlayerHelper', () => {
     PlayerHelper.setCurrentPlayer(userName)
     PlayerHelper.removeCurrentPlayer()
 
-    expect(PlayerHelper.getCurrentPaly()).to.equal(undefined)
+    expect(PlayerHelper.getCurrentPlayer()).to.equal(undefined)
   })
 })

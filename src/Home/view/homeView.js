@@ -1,5 +1,7 @@
 import { LitElement, html, css } from 'lit'
 import '../components/inputFieldComponent.js'
+import '../components/buttonComponent.js'
+import { PlayerHelper } from '../../shared/helpers/playerHelper.js'
 
 const mouseIconSrc = new URL(
   '../../../assets/computer-mouse-solid.svg',
@@ -29,6 +31,14 @@ class HomeView extends LitElement {
     this.userName = userName.replace(/[^a-zA-Z0-9 ]/g, '')
   }
 
+  _joinGame() {
+    if (!this.userName) {
+      return
+    }
+
+    PlayerHelper.setCurrentPlayer(this.userName)
+  }
+
   render() {
     return html`
       <div id="home-containter">
@@ -46,6 +56,10 @@ class HomeView extends LitElement {
             .value=${this.userName}
             @updateValue=${this._updatUserName}
           ></input-field-component>
+          <button-component
+            label="JOIN"
+            @click=${this._joinGame}
+          ></button-component>
         </div>
       </div>
     `
@@ -85,6 +99,11 @@ class HomeView extends LitElement {
     input-field-component {
       display: inline-block;
       width: 300px;
+    }
+
+    button-component {
+      width: 300px;
+      margin-top: 35px;
     }
   `
 }
