@@ -1,7 +1,10 @@
+import { PlayerHelper } from '../../shared/helpers/playerHelper.js'
+
 export class GameHelper {
-  constructor(score) {
+  constructor(score, userName) {
     this.score = score
     this.previusStep = ''
+    this.userName = userName
   }
 
   controlStep(step, isGreen) {
@@ -20,6 +23,7 @@ export class GameHelper {
     }
 
     this.previusStep = step
+    PlayerHelper.updatePlayer(this.userName, this.score)
 
     return this.score
   }

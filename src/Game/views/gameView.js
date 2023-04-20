@@ -1,5 +1,6 @@
 import { LitElement, html, css } from 'lit'
 import { GameHelper } from '../helper/gameHelper.js'
+import { PlayerHelper } from '../../shared/helpers/playerHelper.js'
 import '../components/topBarComponent.js'
 import '../components/stepsComponent.js'
 
@@ -18,15 +19,18 @@ class GameView extends LitElement {
 
   constructor() {
     super()
-    this.userName = 'Pedro'
+    this.userName = 'PedroPlayer'
     this.highScore = 10
     this.score = 0
     this.isGreen = true
-    this.gameHelper = new GameHelper(this.score)
   }
 
   firstUpdated() {
+    this.gameHelper = new GameHelper(this.score, this.userName)
     this._beginGame()
+    const userData = PlayerHelper.getPlayer(this.userName)
+    this.highScore = userData.highScore
+    this.score = userData.score
   }
 
   async _beginGame() {
