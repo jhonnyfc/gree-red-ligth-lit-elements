@@ -21,7 +21,7 @@ TIP: You can use `avn` to deeply integrate into your shell and automatically inv
 npm start
 ```
 
-To run a local development server that serves the basic demo located in `demo/index.html`
+To run at local development server that serves the basic demo located in `demo/index.html`
 
 ## Linting and formatting
 
