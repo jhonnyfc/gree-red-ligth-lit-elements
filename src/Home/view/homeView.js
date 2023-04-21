@@ -1,7 +1,9 @@
 import { LitElement, html, css } from 'lit'
 import '../components/inputFieldComponent.js'
 import '../components/buttonComponent.js'
+import { Router } from '@vaadin/router'
 import { PlayerHelper } from '../../shared/helpers/playerHelper.js'
+import { View } from '../../shared/constants/view.js'
 
 const mouseIconSrc = new URL(
   '../../../assets/computer-mouse-solid.svg',
@@ -37,6 +39,7 @@ class HomeView extends LitElement {
     }
 
     PlayerHelper.setCurrentPlayer(this.userName)
+    Router.go({ pathname: View.Home.id })
   }
 
   render() {

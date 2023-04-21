@@ -8,7 +8,12 @@ describe('InputFieldComponent', () => {
   const label = 'felipe New'
 
   const buildElem = () =>
-    fixture(html`<input-field iconSrc="icon" .label=${label}></input-field>`)
+    fixture(
+      html`<input-field-component
+        iconSrc="icon"
+        .label=${label}
+      ></input-field-component>`
+    )
 
   beforeEach(async () => {
     element = await buildElem()

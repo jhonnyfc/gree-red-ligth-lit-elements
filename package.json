@@ -25,6 +25,7 @@
     "analyze": "cem analyze --litelement"
   },
   "dependencies": {
+    "@vaadin/router": "^1.7.5",
     "lit": "^2.0.2"
   },
   "devDependencies": {
