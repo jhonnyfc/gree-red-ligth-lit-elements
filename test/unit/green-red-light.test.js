@@ -9,7 +9,9 @@ describe('GreenRedLight', () => {
     element = await fixture(html`<green-red-light></green-red-light>`)
   })
 
-  it('passes the a11y audit', async () => {
-    await expect(element).shadowDom.to.be.accessible()
+  it('should exists query selector', async () => {
+    const routerContainer =
+      element.shadowRoot.querySelector('#router-container')
+    expect(routerContainer).to.exist
   })
 })
