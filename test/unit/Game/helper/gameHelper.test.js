@@ -1,14 +1,22 @@
 import { expect } from '@open-wc/testing'
+import sinon from 'sinon'
 import '../../../../src/Game/components/topBarComponent.js'
 import { GameHelper } from '../../../../src/Game/helper/gameHelper.js'
+import { PlayerHelper } from '../../../../src/shared/helpers/playerHelper.js'
 
 describe('GameHelper', () => {
   let step
   let isGreen
 
-  it('should have 3 points when is green', () => {
+  function updatePlayer() {
+    return { fn: () => {} }
+  }
+
+  sinon.replace(PlayerHelper, 'updatePlayer', sinon.fake(updatePlayer))
+
+  it('should have 3 ponits when is green', () => {
     isGreen = true
-    const gameHelper = new GameHelper(0)
+    const gameHelper = new GameHelper(0, 'pedro')
 
     step = 'rigth'
     gameHelper.controlStep(step, isGreen)
@@ -22,7 +30,7 @@ describe('GameHelper', () => {
 
   it('should not have less than 0 points', () => {
     isGreen = true
-    const gameHelper = new GameHelper(0)
+    const gameHelper = new GameHelper(0, 'pedro')
 
     step = 'rigth'
     gameHelper.controlStep(step, isGreen)
@@ -35,7 +43,7 @@ describe('GameHelper', () => {
   })
 
   it('should reset the score when is not green', () => {
-    const gameHelper = new GameHelper(0)
+    const gameHelper = new GameHelper(0, 'pedro')
 
     isGreen = true
     step = 'rigth'
@@ -49,7 +57,7 @@ describe('GameHelper', () => {
   })
 
   it('should return 3000 mills if is not green', () => {
-    const gameHelper = new GameHelper(0)
+    const gameHelper = new GameHelper(0, 'pedro')
 
     isGreen = false
     expect(gameHelper.calcSleepMillis(isGreen)).to.equal(3000)
