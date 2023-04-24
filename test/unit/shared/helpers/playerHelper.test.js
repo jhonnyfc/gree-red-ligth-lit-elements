@@ -12,17 +12,15 @@ describe('PlayerHelper', () => {
 
     expect(PlayerHelper.getPlayer(userName)).to.deep.equal({
       highScore: 0,
-      score: 0
+      score: 0,
+      userName
     })
   })
 
-  it('should get empty palyer if did not exits', () => {
+  it('should get undefined palyer if did not exits', () => {
     const userName = 'someNAme'
 
-    expect(PlayerHelper.getPlayer(userName)).to.deep.equal({
-      highScore: 0,
-      score: 0
-    })
+    expect(PlayerHelper.getPlayer(userName)).to.deep.equal()
   })
 
   it('should  update palay data if score is greater than highScore', () => {
@@ -34,7 +32,8 @@ describe('PlayerHelper', () => {
 
     expect(PlayerHelper.getPlayer(userName)).to.deep.equal({
       highScore: 5,
-      score: 5
+      score: 5,
+      userName
     })
   })
 
@@ -49,7 +48,8 @@ describe('PlayerHelper', () => {
 
     expect(PlayerHelper.getPlayer(userName)).to.deep.equal({
       highScore: firstScore,
-      score: secondScore
+      score: secondScore,
+      userName
     })
   })
 

@@ -3,30 +3,57 @@ import { LocalStorageHelper } from './localStorageHelper.js'
 export class PlayerHelper {
   static CURRENT_PALYER = 'CURRENT_PALYER'
 
+  static PLAYERS_LIST = 'PLAYERS_LIST'
+
   static createPlayer(userName) {
-    const userData = { highScore: 0, score: 0 }
-    LocalStorageHelper.setItem(userName, userData)
+    if (PlayerHelper.getPlayer(userName)) {
+      return
+    }
+
+    const playerList = PlayerHelper.getPlayerList()
+    playerList.push({ highScore: 0, score: 0, userName })
+
+    PlayerHelper.setPlayerList(playerList)
   }
 
   static getPlayer(userName) {
-    const userData = LocalStorageHelper.getItem(userName)
+    const playerList = PlayerHelper.getPlayerList()
 
-    if (!userData) {
-      return { highScore: 0, score: 0 }
-    }
-    return userData
+    return playerList.find((player) => player.userName === userName)
   }
 
   static updatePlayer(userName, score) {
-    const userData = PlayerHelper.getPlayer(userName)
+    const playerList = PlayerHelper.getPlayerList()
 
-    if (userData.highScore < score) {
-      userData.highScore = score
+    const playerIndex = playerList.findIndex(
+      (player) => player.userName === userName
+    )
+
+    if (Number.isNaN(playerIndex)) {
+      return
     }
 
-    userData.score = score
+    if (playerList[playerIndex].highScore < score) {
+      playerList[playerIndex].highScore = score
+    }
 
-    LocalStorageHelper.setItem(userName, userData)
+    playerList[playerIndex].score = score
+
+    PlayerHelper.setPlayerList(playerList)
+  }
+
+  static getPlayerList() {
+    const playerList = LocalStorageHelper.getItem(PlayerHelper.PLAYERS_LIST)
+
+    if (!playerList?.length) {
+      return []
+    }
+
+    return playerList
+  }
+
+  static setPlayerList(playerList) {
+    LocalStorageHelper.setItem(PlayerHelper.PLAYERS_LIST, playerList)
   }
 
   static setCurrentPlayer(userName) {

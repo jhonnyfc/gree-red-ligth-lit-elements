@@ -1,6 +1,4 @@
 export class LocalStorageHelper {
-  static CURRENT_PALYER = 'CURRENT_PALYER'
-
   static setItem(key, data) {
     localStorage.setItem(key, JSON.stringify(data))
   }
@@ -11,6 +9,7 @@ export class LocalStorageHelper {
     if (!data) {
       return
     }
+
     // eslint-disable-next-line
     return JSON.parse(data)
   }
