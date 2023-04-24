@@ -30,7 +30,7 @@ class HomeView extends LitElement {
       this.userName = ''
     }
 
-    this.userName = userName.replace(/[^a-zA-Z0-9 ]/g, '')
+    this.userName = userName.replace(/[^a-z0-9]/gi, '')
   }
 
   _joinGame() {
@@ -38,8 +38,9 @@ class HomeView extends LitElement {
       return
     }
 
+    PlayerHelper.createPlayer(this.userName)
     PlayerHelper.setCurrentPlayer(this.userName)
-    Router.go({ pathname: View.Home.id })
+    Router.go({ pathname: View.Game.id })
   }
 
   render() {
