@@ -13,8 +13,6 @@ class TopBarComponent extends LitElement {
   constructor() {
     super()
     this.userName = 'Pedro'
-    this.highScore = 10
-    this.score = 0
   }
 
   _emitExit() {
