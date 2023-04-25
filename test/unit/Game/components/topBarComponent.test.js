@@ -20,7 +20,7 @@ describe('TopBarComponent', () => {
   })
 
   it('should emit exit event on icno click', async () => {
-    const listener = oneEvent(element, 'gameExit')
+    const listener = oneEvent(element, 'game-exit')
 
     const exitIconEl = element.shadowRoot.querySelector('.exit-icon')
     expect(exitIconEl).to.exist

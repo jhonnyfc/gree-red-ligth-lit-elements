@@ -16,7 +16,7 @@ class TopBarComponent extends LitElement {
   }
 
   _emitExit() {
-    this.dispatchEvent(new CustomEvent('gameExit'))
+    this.dispatchEvent(new CustomEvent('game-exit'))
   }
 
   render() {
