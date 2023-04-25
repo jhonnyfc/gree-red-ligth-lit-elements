@@ -3,48 +3,48 @@ import '../../../../src/Game/components/topBarComponent.js'
 import { GameHelper } from '../../../../src/Game/helper/gameHelper.js'
 
 describe('GameHelper', () => {
-  let setp
+  let step
   let isGreen
 
-  it('should have 3 ponits when is green', () => {
+  it('should have 3 points when is green', () => {
     isGreen = true
     const gameHelper = new GameHelper(0)
 
-    setp = 'rigth'
-    gameHelper.controlStep(setp, isGreen)
-    setp = 'left'
-    gameHelper.controlStep(setp, isGreen)
-    setp = 'rigth'
-    gameHelper.controlStep(setp, isGreen)
+    step = 'rigth'
+    gameHelper.controlStep(step, isGreen)
+    step = 'left'
+    gameHelper.controlStep(step, isGreen)
+    step = 'rigth'
+    gameHelper.controlStep(step, isGreen)
 
     expect(gameHelper.score).to.equal(3)
   })
 
-  it('should have 0 ponits when is green', () => {
+  it('should not have less than 0 points', () => {
     isGreen = true
     const gameHelper = new GameHelper(0)
 
-    setp = 'rigth'
-    gameHelper.controlStep(setp, isGreen)
-    setp = 'left'
-    gameHelper.controlStep(setp, isGreen)
-    gameHelper.controlStep(setp, isGreen)
-    gameHelper.controlStep(setp, isGreen)
+    step = 'rigth'
+    gameHelper.controlStep(step, isGreen)
+    step = 'left'
+    gameHelper.controlStep(step, isGreen)
+    gameHelper.controlStep(step, isGreen)
+    gameHelper.controlStep(step, isGreen)
 
     expect(gameHelper.score).to.equal(0)
   })
 
-  it('should rest score when is not green', () => {
+  it('should reset the score when is not green', () => {
     const gameHelper = new GameHelper(0)
 
     isGreen = true
-    setp = 'rigth'
-    gameHelper.controlStep(setp, isGreen)
-    setp = 'left'
-    gameHelper.controlStep(setp, isGreen)
+    step = 'rigth'
+    gameHelper.controlStep(step, isGreen)
+    step = 'left'
+    gameHelper.controlStep(step, isGreen)
     expect(gameHelper.score).to.equal(2)
     isGreen = false
-    gameHelper.controlStep(setp, isGreen)
+    gameHelper.controlStep(step, isGreen)
     expect(gameHelper.score).to.equal(0)
   })
 

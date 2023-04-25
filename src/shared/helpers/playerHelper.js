@@ -29,7 +29,7 @@ export class PlayerHelper {
     LocalStorageHelper.setItem(userName, userData)
   }
 
-  static serCurrentPaly(userName) {
+  static setCurrentPlayer(userName) {
     LocalStorageHelper.setItem(PlayerHelper.CURRENT_PALYER, userName)
   }
 
