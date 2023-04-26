@@ -65,7 +65,7 @@ class GameView extends LitElement {
       <div id="game-containter">
         <top-bar-component
           .userName=${this.userName}
-          @gameExit=${this._exitGame}
+          @game-exit=${this._exitGame}
         ></top-bar-component>
         <div>
           <p class="high-score-title">High Score: ${this.highScore}</p>

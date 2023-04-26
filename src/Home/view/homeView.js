@@ -58,7 +58,7 @@ class HomeView extends LitElement {
           <input-field-component
             label="Name*"
             .value=${this.userName}
-            @updateValue=${this._updatUserName}
+            @update-value=${this._updatUserName}
           ></input-field-component>
           <button-component
             label="JOIN"

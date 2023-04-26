@@ -36,7 +36,7 @@ class InputFieldComponent extends LitElement {
   _setValue(value) {
     this.value = value
     this.dispatchEvent(
-      new CustomEvent('updateValue', { detail: { value: this.value } })
+      new CustomEvent('update-value', { detail: { value: this.value } })
     )
   }
 

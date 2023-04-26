@@ -52,7 +52,7 @@ describe('InputFieldComponent', () => {
     element = await buildElem()
 
     const value = 'pepe'
-    const listener = oneEvent(element, 'updateValue')
+    const listener = oneEvent(element, 'update-value')
 
     element._setValue(value)
 
