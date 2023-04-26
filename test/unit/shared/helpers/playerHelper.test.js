@@ -1,7 +1,22 @@
 import { expect } from '@open-wc/testing'
+import sinon from 'sinon'
 import { PlayerHelper } from '../../../../src/shared/helpers/playerHelper.js'
 
 describe('PlayerHelper', () => {
+  let fackeStorage = {}
+
+  sinon.stub(localStorage, 'getItem').callsFake((key) => fackeStorage[key])
+  sinon.stub(localStorage, 'setItem').callsFake((key, value) => {
+    fackeStorage[key] = value
+  })
+  sinon.stub(localStorage, 'removeItem').callsFake((key) => {
+    const { [key]: removedProperty, ...remainingObject } = fackeStorage
+    fackeStorage = { ...remainingObject }
+  })
+  sinon.stub(localStorage, 'clear').callsFake(() => {
+    fackeStorage = {}
+  })
+
   beforeEach(() => {
     localStorage.clear()
   })
