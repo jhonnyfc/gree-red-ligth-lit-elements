@@ -3,7 +3,7 @@
   "description": "Webcomponent green-red-light following open-wc recommendations",
   "license": "MIT",
   "author": "green-red-light",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
   "scripts": {
     "start": "web-dev-server",
@@ -25,6 +25,7 @@
     "analyze": "cem analyze --litelement"
   },
   "dependencies": {
+    "@vaadin/router": "^1.7.5",
     "lit": "^2.0.2"
   },
   "devDependencies": {
@@ -52,6 +53,7 @@
     "prettier": "^2.4.1",
     "rimraf": "^3.0.2",
     "rollup": "^2.60.0",
+    "rollup-plugin-copy": "^3.4.0",
     "rollup-plugin-esbuild": "^5.0.0",
     "rollup-plugin-workbox": "^6.2.0",
     "sinon": "^15.0.3"

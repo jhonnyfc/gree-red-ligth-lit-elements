@@ -1,6 +1,8 @@
 import { LitElement, html, css } from 'lit'
+import { Router } from '@vaadin/router'
 import { GameHelper } from '../helper/gameHelper.js'
 import { PlayerHelper } from '../../shared/helpers/playerHelper.js'
+import { View } from '../../shared/constants/view.js'
 import '../components/topBarComponent.js'
 import '../components/stepsComponent.js'
 
@@ -19,18 +21,19 @@ class GameView extends LitElement {
 
   constructor() {
     super()
-    this.userName = 'PedroPlayer'
-    this.highScore = 10
+    this.userName = ''
+    this.highScore = 0
     this.score = 0
     this.isGreen = true
   }
 
   firstUpdated() {
-    this.gameHelper = new GameHelper(this.score, this.userName)
-    this._beginGame()
+    this.userName = PlayerHelper.getCurrentPlayer()
     const userData = PlayerHelper.getPlayer(this.userName)
     this.highScore = userData.highScore
     this.score = userData.score
+    this.gameHelper = new GameHelper(this.score, this.userName)
+    this._beginGame()
   }
 
   async _beginGame() {
@@ -51,10 +54,19 @@ class GameView extends LitElement {
     this.score = this.gameHelper.controlStep(detail, this.isGreen)
   }
 
+  _exitGame() {
+    PlayerHelper.updatePlayer(this.userName, this.score)
+    PlayerHelper.removeCurrentPlayer()
+    Router.go({ pathname: View.Home.id })
+  }
+
   render() {
     return html`
       <div id="game-containter">
-        <top-bar-component .userName=${this.userName}></top-bar-component>
+        <top-bar-component
+          .userName=${this.userName}
+          @game-exit=${this._exitGame}
+        ></top-bar-component>
         <div>
           <p class="high-score-title">High Score: ${this.highScore}</p>
           <img
