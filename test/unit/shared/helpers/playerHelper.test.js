@@ -1,7 +1,22 @@
 import { expect } from '@open-wc/testing'
+import sinon from 'sinon'
 import { PlayerHelper } from '../../../../src/shared/helpers/playerHelper.js'
 
 describe('PlayerHelper', () => {
+  let fackeStorage = {}
+
+  sinon.stub(localStorage, 'getItem').callsFake((key) => fackeStorage[key])
+  sinon.stub(localStorage, 'setItem').callsFake((key, value) => {
+    fackeStorage[key] = value
+  })
+  sinon.stub(localStorage, 'removeItem').callsFake((key) => {
+    const { [key]: removedProperty, ...remainingObject } = fackeStorage
+    fackeStorage = { ...remainingObject }
+  })
+  sinon.stub(localStorage, 'clear').callsFake(() => {
+    fackeStorage = {}
+  })
+
   beforeEach(() => {
     localStorage.clear()
   })
@@ -12,17 +27,15 @@ describe('PlayerHelper', () => {
 
     expect(PlayerHelper.getPlayer(userName)).to.deep.equal({
       highScore: 0,
-      score: 0
+      score: 0,
+      userName
     })
   })
 
-  it('should get empty palyer if did not exits', () => {
+  it('should get undefined palyer if did not exits', () => {
     const userName = 'someNAme'
 
-    expect(PlayerHelper.getPlayer(userName)).to.deep.equal({
-      highScore: 0,
-      score: 0
-    })
+    expect(PlayerHelper.getPlayer(userName)).to.deep.equal()
   })
 
   it('should  update palay data if score is greater than highScore', () => {
@@ -34,7 +47,8 @@ describe('PlayerHelper', () => {
 
     expect(PlayerHelper.getPlayer(userName)).to.deep.equal({
       highScore: 5,
-      score: 5
+      score: 5,
+      userName
     })
   })
 
@@ -49,7 +63,8 @@ describe('PlayerHelper', () => {
 
     expect(PlayerHelper.getPlayer(userName)).to.deep.equal({
       highScore: firstScore,
-      score: secondScore
+      score: secondScore,
+      userName
     })
   })
 
@@ -57,7 +72,7 @@ describe('PlayerHelper', () => {
     const userName = 'someNAme'
 
     PlayerHelper.setCurrentPlayer(userName)
-    expect(PlayerHelper.getCurrentPaly()).to.equal(userName)
+    expect(PlayerHelper.getCurrentPlayer()).to.equal(userName)
   })
 
   it('should  save and remove current player', () => {
@@ -66,6 +81,6 @@ describe('PlayerHelper', () => {
     PlayerHelper.setCurrentPlayer(userName)
     PlayerHelper.removeCurrentPlayer()
 
-    expect(PlayerHelper.getCurrentPaly()).to.equal(undefined)
+    expect(PlayerHelper.getCurrentPlayer()).to.equal(undefined)
   })
 })

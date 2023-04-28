@@ -3,7 +3,7 @@
   "description": "Webcomponent green-red-light following open-wc recommendations",
   "license": "MIT",
   "author": "green-red-light",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
   "scripts": {
     "start": "web-dev-server",
@@ -25,6 +25,7 @@
     "analyze": "cem analyze --litelement"
   },
   "dependencies": {
+    "@vaadin/router": "^1.7.5",
     "lit": "^2.0.2"
   },
   "devDependencies": {
