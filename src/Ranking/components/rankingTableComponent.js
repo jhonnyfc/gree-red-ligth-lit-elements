@@ -50,7 +50,6 @@ class RankingTableComponent extends LitElement {
     #ranking-table-container {
       width: 250px;
       font-size: 1.25rem;
-      overflow-y: scroll;
     }
 
     #ranking-table-head {
