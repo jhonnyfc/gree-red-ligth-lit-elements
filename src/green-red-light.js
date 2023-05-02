@@ -2,6 +2,7 @@ import { LitElement, html, css } from 'lit'
 import { AppRouter } from './shared/helpers/router.js'
 import './Game/views/gameView.js'
 import './Home/view/homeView.js'
+import './Ranking/views/rankingView.js'
 
 class GreenRedLight extends LitElement {
   firstUpdated() {
@@ -14,7 +15,7 @@ class GreenRedLight extends LitElement {
 
   static styles = css`
     :host {
-      min-height: 100vh;
+      min-height: 100%;
       color: white;
     }
 
@@ -22,6 +23,7 @@ class GreenRedLight extends LitElement {
       background-color: #121113;
       height: 100vh;
       width: 100%;
+      overflow-y: scroll;
     }
   `
 }

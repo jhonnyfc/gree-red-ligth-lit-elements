@@ -13,6 +13,7 @@ function initRouter() {
       component: View.Home.component
     },
     { path: View.Game.id, component: View.Game.component },
+    { path: View.Ranking.id, component: View.Ranking.component },
     { path: '(.*)', redirect: View.Home.id }
   ])
 
