@@ -41,7 +41,11 @@ describe('GameView', () => {
     element = await fixture(html`<home-view></home-view>`)
 
     element.userName = 'pep'
-    element._joinGame()
+
+    const joinButtonEl = element.shadowRoot.querySelector('#join-button')
+    expect(joinButtonEl).to.exist
+
+    joinButtonEl.click()
 
     assert(goSpy.calledOnce)
     assert(createPlayerSpy.calledOnce)
@@ -56,7 +60,11 @@ describe('GameView', () => {
     element = await fixture(html`<home-view></home-view>`)
 
     element.userName = ''
-    element._joinGame()
+
+    const joinButtonEl = element.shadowRoot.querySelector('#join-button')
+    expect(joinButtonEl).to.exist
+
+    joinButtonEl.click()
 
     assert.isNotOk(goSpy.calledOnce)
     assert.isNotOk(createPlayerSpy.calledOnce)

@@ -1,6 +1,6 @@
 import { html } from 'lit'
 import sinon from 'sinon'
-import { fixture, expect } from '@open-wc/testing'
+import { fixture, expect, assert } from '@open-wc/testing'
 import { Router } from '@vaadin/router'
 import { PlayerHelper } from '../../../../src/shared/helpers/playerHelper.js'
 import { View } from '../../../../src/shared/constants/view.js'
@@ -34,6 +34,6 @@ describe('RankingView', () => {
 
     exitIconEl.click()
 
-    expect(routerGoStub.calledWith({ pathname: View.Home.id })).to.equal(true)
+    assert.isOk(routerGoStub.calledWith({ pathname: View.Home.id }))
   })
 })

@@ -65,6 +65,7 @@ class HomeView extends LitElement {
             @update-value=${this._updatUserName}
           ></input-field-component>
           <button-component
+            id="join-button"
             label="JOIN"
             @click=${this._joinGame}
           ></button-component>
