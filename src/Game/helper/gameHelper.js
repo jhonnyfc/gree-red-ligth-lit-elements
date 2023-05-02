@@ -44,6 +44,10 @@ export class GameHelper {
   }
 
   calcSleepMillis(isGreen) {
+    if (typeof isGreen !== 'boolean') {
+      throw Error('GameHelper - calcSleepMillis: isGreen should be Boolean')
+    }
+
     if (!isGreen) {
       return 3000
     }
