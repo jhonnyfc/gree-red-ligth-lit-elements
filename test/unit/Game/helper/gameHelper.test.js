@@ -62,4 +62,24 @@ describe('GameHelper', () => {
     isGreen = false
     expect(gameHelper.calcSleepMillis(isGreen)).to.equal(3000)
   })
+
+  it('should throw an error with undefinded isGreen', () => {
+    const gameHelper = new GameHelper(0, 'pedro')
+
+    isGreen = undefined
+
+    expect(() => gameHelper.calcSleepMillis(isGreen)).to.throw(
+      'GameHelper - calcSleepMillis: isGreen should be Boolean'
+    )
+  })
+
+  it('should throw an error with string isGreen', () => {
+    const gameHelper = new GameHelper(0, 'pedro')
+
+    isGreen = 'lol'
+
+    expect(() => gameHelper.calcSleepMillis(isGreen)).to.throw(
+      'GameHelper - calcSleepMillis: isGreen should be Boolean'
+    )
+  })
 })

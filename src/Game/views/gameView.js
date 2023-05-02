@@ -42,7 +42,7 @@ class GameView extends LitElement {
       await new Promise((resolve) => {
         setTimeout(() => {
           resolve()
-        }, this.gameHelper.calcSleepMillis())
+        }, this.gameHelper.calcSleepMillis(this.isGreen))
       })
       this.isGreen = !this.isGreen
     }
