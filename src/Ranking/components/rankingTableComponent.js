@@ -15,7 +15,7 @@ class RankingTableComponent extends LitElement {
   }
 
   _sortPlayerList() {
-    this.playersList = this.playersList.sort(
+    this.playersList.sort(
       (playerA, playerB) => playerB.highScore - playerA.highScore
     )
   }
