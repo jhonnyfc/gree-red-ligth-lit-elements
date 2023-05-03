@@ -7,6 +7,7 @@ import { PlayerHelper } from '../../../../src/shared/helpers/playerHelper.js'
 
 describe('GameView', () => {
   let element
+  const playerMock = { score: 0, highScore: 0, userName: 'olo' }
 
   function fn() {}
 
@@ -14,7 +15,7 @@ describe('GameView', () => {
   sinon.replace(
     PlayerHelper,
     'getPlayer',
-    sinon.fake(() => ({ score: 0, highScore: 0, userName: 'olo' }))
+    sinon.fake(() => playerMock)
   )
   sinon.replace(PlayerHelper, 'updatePlayer', sinon.fake(fn))
   sinon.replace(PlayerHelper, 'removeCurrentPlayer', sinon.fake(fn))
@@ -43,5 +44,18 @@ describe('GameView', () => {
     await aTimeout(500)
 
     assert(goSpy.calledOnce)
+    expect(element.isPlaying).to.equal(false)
+  })
+
+  it('shooudl contrl stpec click', async () => {
+    element = await fixture(html`<game-view></game-view>`)
+
+    playerMock.highScore = 55
+    const controlStepSpy = sinon.spy(element.gameHelper, 'controlStep')
+    element.isGreen = true
+    element._stepClick({ detail: 'left' })
+
+    assert(controlStepSpy.calledWith('left', true))
+    expect(element.highScore).to.equal(playerMock.highScore)
   })
 })
