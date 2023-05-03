@@ -43,6 +43,10 @@ class HomeView extends LitElement {
     Router.go({ pathname: View.Game.id })
   }
 
+  static _navigateRanking() {
+    Router.go({ pathname: View.Ranking.id })
+  }
+
   render() {
     return html`
       <div id="home-containter">
@@ -61,8 +65,14 @@ class HomeView extends LitElement {
             @update-value=${this._updatUserName}
           ></input-field-component>
           <button-component
+            id="join-button"
             label="JOIN"
             @click=${this._joinGame}
+          ></button-component>
+          <button-component
+            id="ranking-button"
+            label="RANKING"
+            @click=${HomeView._navigateRanking}
           ></button-component>
         </div>
       </div>

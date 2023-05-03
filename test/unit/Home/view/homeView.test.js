@@ -3,6 +3,7 @@ import { fixture, expect, assert } from '@open-wc/testing'
 import sinon from 'sinon'
 import { Router } from '@vaadin/router'
 import { PlayerHelper } from '../../../../src/shared/helpers/playerHelper.js'
+import { View } from '../../../../src/shared/constants/view.js'
 import '../../../../src/Home/view/homeView.js'
 
 describe('GameView', () => {
@@ -40,7 +41,11 @@ describe('GameView', () => {
     element = await fixture(html`<home-view></home-view>`)
 
     element.userName = 'pep'
-    element._joinGame()
+
+    const joinButtonEl = element.shadowRoot.querySelector('#join-button')
+    expect(joinButtonEl).to.exist
+
+    joinButtonEl.click()
 
     assert(goSpy.calledOnce)
     assert(createPlayerSpy.calledOnce)
@@ -55,10 +60,27 @@ describe('GameView', () => {
     element = await fixture(html`<home-view></home-view>`)
 
     element.userName = ''
-    element._joinGame()
+
+    const joinButtonEl = element.shadowRoot.querySelector('#join-button')
+    expect(joinButtonEl).to.exist
+
+    joinButtonEl.click()
 
     assert.isNotOk(goSpy.calledOnce)
     assert.isNotOk(createPlayerSpy.calledOnce)
     assert.isNotOk(setCurrentPlayerSpy.calledOnce)
+  })
+
+  it('should go to ranking view', async () => {
+    goSpy = sinon.spy(Router, 'go')
+
+    element = await fixture(html`<home-view></home-view>`)
+
+    const rankingButtonEl = element.shadowRoot.querySelector('#ranking-button')
+    expect(rankingButtonEl).to.exist
+
+    rankingButtonEl.click()
+
+    assert.isOk(goSpy.calledWith({ pathname: View.Ranking.id }))
   })
 })
