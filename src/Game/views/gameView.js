@@ -11,12 +11,17 @@ const traffiLightIconSrc = new URL(
   import.meta.url
 ).href
 
+const gameSoundnSrc = new URL('../../../assets/game-song.mp3', import.meta.url)
+  .href
+
 class GameView extends LitElement {
   static properties = {
     userName: { type: String, state: true },
     highScore: { type: Number, state: true },
     score: { type: Number, state: true },
-    isGreen: { type: Boolean, state: true }
+    isGreen: { type: Boolean, state: true },
+    gameSoundEl: { type: Object, state: true },
+    isPlaying: { type: Object, state: true }
   }
 
   constructor() {
@@ -25,6 +30,7 @@ class GameView extends LitElement {
     this.highScore = 0
     this.score = 0
     this.isGreen = true
+    this.isPlaying = false
   }
 
   firstUpdated() {
@@ -33,31 +39,67 @@ class GameView extends LitElement {
     this.highScore = userData.highScore
     this.score = userData.score
     this.gameHelper = new GameHelper(this.score, this.userName)
+
+    this.gameSoundEl = this.shadowRoot.querySelector('#game-sound')
+    this._pauseMusic()
+
     this._beginGame()
   }
 
   async _beginGame() {
+    this.isPlaying = true
     for (;;) {
+      if (!this.isPlaying) {
+        return
+      }
+      const sleepMills = this.gameHelper.calcSleepMillis(this.isGreen)
+      this._musicControll(sleepMills)
       // eslint-disable-next-line
       await new Promise((resolve) => {
         setTimeout(() => {
           resolve()
-        }, this.gameHelper.calcSleepMillis(this.isGreen))
+        }, sleepMills)
       })
       this.isGreen = !this.isGreen
     }
+  }
+
+  _endGame() {
+    this.isPlaying = false
   }
 
   _stepClick(e) {
     const { detail } = e
 
     this.score = this.gameHelper.controlStep(detail, this.isGreen)
+
+    const { highScore } = PlayerHelper.getPlayer(this.userName)
+    this.highScore = highScore
   }
 
   _exitGame() {
     PlayerHelper.updatePlayer(this.userName, this.score)
     PlayerHelper.removeCurrentPlayer()
+    this.isPlaying = false
     Router.go({ pathname: View.Home.id })
+  }
+
+  _musicControll(sleepMills) {
+    if (this.isGreen) {
+      return this._playMusic(sleepMills)
+    }
+
+    return this._pauseMusic()
+  }
+
+  _playMusic(sleepMills) {
+    this.gameSoundEl.play()
+    this.gameSoundEl.playbackRate = (11.232 * 1000) / sleepMills
+  }
+
+  _pauseMusic() {
+    this.gameSoundEl.pause()
+    this.gameSoundEl.currentTime = 0
   }
 
   render() {
@@ -80,6 +122,9 @@ class GameView extends LitElement {
           <steps-component @playerStep=${this._stepClick}></steps-component>
         </div>
       </div>
+      <audio id="game-sound" preload="metadata">
+        <source .src=${gameSoundnSrc} />
+      </audio>
     `
   }
 
