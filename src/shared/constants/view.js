@@ -6,6 +6,10 @@ const View = {
   Game: {
     id: '/game',
     component: 'game-view'
+  },
+  Ranking: {
+    id: '/ranking',
+    component: 'ranking-view'
   }
 }
 
