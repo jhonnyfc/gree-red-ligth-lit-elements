@@ -46,6 +46,11 @@ class GameView extends LitElement {
     this._beginGame()
   }
 
+  disconnectedCallback() {
+    super.disconnectedCallback()
+    this._endGame()
+  }
+
   async _beginGame() {
     this.isPlaying = true
     for (;;) {

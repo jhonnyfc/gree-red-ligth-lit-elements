@@ -1,4 +1,4 @@
-import { expect } from '@open-wc/testing'
+import { assert, expect } from '@open-wc/testing'
 import sinon from 'sinon'
 import '../../../../src/Game/components/topBarComponent.js'
 import { GameHelper } from '../../../../src/Game/helper/gameHelper.js'
@@ -13,6 +13,11 @@ describe('GameHelper', () => {
   }
 
   sinon.replace(PlayerHelper, 'updatePlayer', sinon.fake(updatePlayer))
+  let vibrateStub = sinon.stub(navigator, 'vibrate')
+
+  beforeEach(async () => {
+    if (vibrateStub) vibrateStub.restore()
+  })
 
   it('should have 3 ponits when is green', () => {
     isGreen = true
@@ -29,6 +34,7 @@ describe('GameHelper', () => {
   })
 
   it('should not have less than 0 points', () => {
+    vibrateStub = sinon.stub(navigator, 'vibrate')
     isGreen = true
     const gameHelper = new GameHelper(0, 'pedro')
 
@@ -40,9 +46,11 @@ describe('GameHelper', () => {
     gameHelper.controlStep(step, isGreen)
 
     expect(gameHelper.score).to.equal(0)
+    assert(vibrateStub.calledWith(200))
   })
 
   it('should reset the score when is not green', () => {
+    vibrateStub = sinon.stub(navigator, 'vibrate')
     const gameHelper = new GameHelper(0, 'pedro')
 
     isGreen = true
@@ -54,6 +62,7 @@ describe('GameHelper', () => {
     isGreen = false
     gameHelper.controlStep(step, isGreen)
     expect(gameHelper.score).to.equal(0)
+    assert(vibrateStub.calledWith(200))
   })
 
   it('should return 3000 mills if is not green', () => {
@@ -63,7 +72,7 @@ describe('GameHelper', () => {
     expect(gameHelper.calcSleepMillis(isGreen)).to.equal(3000)
   })
 
-  it('should throw an error with undefinded isGreen', () => {
+  it('should throw an error with undefinded isGreen on calcSleepMillis', () => {
     const gameHelper = new GameHelper(0, 'pedro')
 
     isGreen = undefined
@@ -73,7 +82,7 @@ describe('GameHelper', () => {
     )
   })
 
-  it('should throw an error with string isGreen', () => {
+  it('should throw an error with string isGreen on calcSleepMillis', () => {
     const gameHelper = new GameHelper(0, 'pedro')
 
     isGreen = 'lol'
