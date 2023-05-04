@@ -33,6 +33,7 @@ export class GameHelper {
   }
 
   _substracStep() {
+    navigator.vibrate(200)
     if (this.score === 0) {
       return
     }
@@ -40,6 +41,7 @@ export class GameHelper {
   }
 
   _resetScore() {
+    navigator.vibrate(200)
     this.score = 0
   }
 
