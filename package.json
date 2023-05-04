@@ -3,7 +3,7 @@
   "description": "Webcomponent green-red-light following open-wc recommendations",
   "license": "MIT",
   "author": "green-red-light",
-  "version": "2.0.0",
+  "version": "4.0.0",
   "type": "module",
   "scripts": {
     "start": "web-dev-server",
