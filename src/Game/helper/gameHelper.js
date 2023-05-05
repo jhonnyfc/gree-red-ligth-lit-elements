@@ -33,7 +33,7 @@ export class GameHelper {
   }
 
   _substracStep() {
-    navigator.vibrate(200)
+    GameHelper._vibrate()
     if (this.score === 0) {
       return
     }
@@ -41,8 +41,14 @@ export class GameHelper {
   }
 
   _resetScore() {
-    navigator.vibrate(200)
+    GameHelper._vibrate()
     this.score = 0
+  }
+
+  static _vibrate() {
+    if (navigator?.vibrate) {
+      navigator.vibrate(200)
+    }
   }
 
   calcSleepMillis(isGreen) {
