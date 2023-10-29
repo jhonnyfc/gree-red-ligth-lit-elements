@@ -1,6 +1,6 @@
 const View = {
   Home: {
-    id: '/home',
+    id: '/',
     component: 'home-view'
   },
   Game: {
